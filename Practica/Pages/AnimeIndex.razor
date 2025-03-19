@@ -1,0 +1,46 @@
+﻿@page "/anime"
+@using Practica.Services
+@using Practica.Models
+@inject AnimeService AnimeService
+
+
+<h3>Buscar Anime</h3>
+<input @bind="searchQuery" placeholder="Escribe un nombre..." />
+<button @onclick="SearchAnime">Buscar</button>
+
+@if (animes is not null)
+{
+    <ul>
+        @foreach (var anime in animes.Animes)
+        {
+            <li>
+                <img src="@anime.Images.Jpg.ImageUrl" alt="@anime.Title" width="100" />
+                <strong>@anime.Title</strong> - Score: @anime.Score
+                <p>@GetRecommendation(anime.Score)</p>
+            </li>
+        }
+    </ul>
+    <AnimeIndex />
+}
+
+@code {
+    private string searchQuery = "";
+    private AnimeSearchResult? animes;
+
+    private async Task SearchAnime()
+    {
+        animes = await AnimeService.SearchAnime(searchQuery);
+    }
+
+    private string GetRecommendation(double? score)
+    {
+        if (score is null) return "Sin calificación";
+        return score switch
+        {
+            <= 4 => " No lo recomiendo.",
+            <= 7 => "Podría ser divertido.",
+            > 7 => "¡Uno de los mejores!",
+            _ => "Sin calificación"
+        };
+    }
+}
