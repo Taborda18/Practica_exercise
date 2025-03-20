@@ -1,0 +1,41 @@
+body {
+    background-color: #007BFF;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+}
+
+li {
+    flex: 1 1 200px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+    ul {
+        flex-direction: column;
+    }
+
+    li {
+        width: 100%;
+    }
+}

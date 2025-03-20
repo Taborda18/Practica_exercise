@@ -3,6 +3,11 @@
 @using Practica.Models
 @inject AnimeService AnimeService
 
+<head>
+
+    <link href="css/Style.css" rel="stylesheet" />
+</head>
+
 
 <h3>Buscar Anime</h3>
 <input @bind="searchQuery" placeholder="Escribe un nombre..." />
@@ -15,13 +20,14 @@
         {
             <li>
                 <img src="@anime.Images.Jpg.ImageUrl" alt="@anime.Title" width="100" />
-                <strong>@anime.Title</strong> - Score: @anime.Score
+                <strong>@anime.Title</strong> - Puntuacion: @anime.Score
                 <p>@GetRecommendation(anime.Score)</p>
             </li>
         }
     </ul>
     <AnimeIndex />
 }
+
 
 @code {
     private string searchQuery = "";
